@@ -54,7 +54,13 @@
 <script src="js/jquery.photoClip.js"></script>
 <script>
     function direct() {
-        window.location.href='result.html';
+        var eventId = '103770834';
+        var section = 115;
+        var row = 'M';
+        var seat = '2';
+        var auto_pricing = 115;
+        window.location.href='result.html?eventId=' + eventId + '&section=' + section
+        + "&row=" + row + "&seat=" + seat + "&auto_pricing=" + auto_pricing;
     }
     var obUrl = ''
     //document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);

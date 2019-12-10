@@ -60,7 +60,7 @@
             EventId:
            </div>
            <div class="right">
-             <input placeholder="103770834">
+             <input id="EventId" placeholder="103770834">
            </div>
            <div class="clear"></div>
        </li>
@@ -69,7 +69,7 @@
                Section:
            </div>
            <div class="right">
-               <input placeholder="115">
+               <input id="Section" placeholder="115">
            </div>
            <div class="clear"></div>
        </li>
@@ -78,7 +78,7 @@
                Row:
            </div>
            <div class="right">
-               <input placeholder="M">
+               <input id="Row" placeholder="M">
            </div>
            <div class="clear"></div>
        </li>
@@ -87,7 +87,7 @@
                Seat:
            </div>
            <div class="right">
-               <input placeholder="2">
+               <input id="Seat" placeholder="2">
            </div>
            <div class="clear"></div>
        </li>
@@ -96,7 +96,7 @@
                Auto-Pricing:
            </div>
            <div class="right">
-               <input placeholder="$115">
+               <input id="Auto-Pricing" placeholder="$115">
            </div>
            <div class="clear"></div>
        </li>
@@ -135,8 +135,33 @@
     });
 </script>
 <script>
-    $(function(){
-        $("#logox").click(function(){
+function  getParams(name, href) {
+    var href = href || window.location.href,
+      value = '';
+    if (name) {
+      var reg = new RegExp(name + '=([^&]*)', 'g');
+      href.replace(reg, function($0, $1) {
+        value = decodeURI($1);
+      });
+    } else {
+      value = {};
+      var reg = /\b(\w+)=([^\/&]*)/g;
+      href.replace(reg, function($0, $1, $2) {
+        value[$1] = decodeURI($2);
+      });
+    }
+    return value;
+  };
+
+$(function(){
+
+    $("#EventId").val(getParams('eventId'));
+    $("#Section").val(getParams("section"));
+    $("#Row").val(getParams('row'));
+    $("#Seat").val(getParams('seat'));
+    $("#Auto-Pricing").val(getParams('auto_pricing'));
+
+    $("#logox").click(function(){
         $(".htmleaf-container").show();
     })
     $("#clipBtn").click(function(){
@@ -147,7 +172,8 @@
     $("#go_back").click(function(){
         window.location.href='index.html';
     })
-    });
+
+});
 </script>
 <script type="text/javascript">
     $(function(){
