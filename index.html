@@ -26,18 +26,14 @@
             <a class="license">
                 <img id="img-1" src="images/logo_n.png"/>
             </a>
-            <input id="file0" class="file-3" type="file" hidden="true" onchange="javascript:setImagePreview();" accept="image/*" capture="camera"/>
+            <input id="file0" class="file-3" type="file" accept="image/*" capture="camera"/>
         </div>
         <div class="yulan">
             <img src="" id="img0" >
-            <img id="imgTag" src="" alt="imgTag" hidden="true">
-            <video id="video" width="500px" height="500px" autoplay="autoplay"></video>
-            <canvas id="canvas" width="500px" height="500px" hidden="true"></canvas>
             <div class="enter">
-                <button class="btn-2 fl">Cancle</button>
-                <button class="btn-6 fc">OK</button>
-                <button class="btn-3 fr">Confirm</button>
-            </div>
+                    <button class="btn-2 fl">Cancle</button>
+                    <button class="btn-3 fr">Confirm</button>
+                </div>
         </div>
 
     </div>
@@ -208,16 +204,15 @@ $(function(){
 <script type="text/javascript">
   var subUrl = "";
   let mediaStreamTrack=null; 
+
   function openMedia() {
     let constraints = {
-      video: { width: 500, height: 500},
+      video: { width: 500, height: 500,'facingMode': { exact: "environment" }},
       audio: true
     };
-
     let video = document.getElementById('video');
     let promise = navigator.mediaDevices.getUserMedia(constraints);
     promise.then((mediaStream) => {
-      mediaStreamTrack = typeof mediaStream.stop === 'function' ? mediaStream : mediaStream.getTracks()[1];
       video.srcObject = mediaStream;
       video.play();
     });
@@ -233,16 +228,17 @@ $(function(){
   }
   // close camera
   function closeMedia() {
-    mediaStreamTrack.stop();
+    // mediaStreamTrack.stop();
+    if (video.srcObject) {
+        video.srcObject.getTracks().forEach(function (track) { track.stop(); });
+    }
   }
 $(function (){
-    $(".license").bind('click',function(){
+    $(".file-3").bind('change',function(){
             subUrl = $(this).val()
-            $(".yulan").show();
-            $(".file-3").val("");
-            $("#video").show();
-            $("#imgTag").hide();
-            openMedia();
+            $("#img-1").attr("src", obUrl);
+            $(".yulan").hide();
+            $(".file-3").parents(".uploader").find(".filename").val(subUrl);
         });
     $(".file-3").each(function(){
             if($(this).val()==""){
@@ -250,10 +246,12 @@ $(function (){
             }
         });
     $(".btn-3").click(function(){
-        closeMedia()
-        $("#img-1").attr("src",document.getElementById('imgTag').src);
+        $("#img-1").attr("src", obUrl);
         $(".yulan").hide();
-        $(".file-3").parents(".uploader").find(".filename").val("Ticket");
+        $(".file-3").parents(".uploader").find(".filename").val(subUrl);
+    })
+    $(".btn-2").click(function(){
+            $(".yulan").hide();
     })
 
     $(".btn-6").click(function(){
@@ -264,10 +262,7 @@ $(function (){
         closeMedia()
     })
 
-    $(".btn-2").click(function(){
-        closeMedia()
-        $(".yulan").hide();
-    })
+    
 });
 </script>
 <script type="text/javascript">
