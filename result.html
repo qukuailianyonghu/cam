@@ -15,7 +15,7 @@
 <body>
 <header>
     <img src="images/rpw_back_n.png"/>
-    <span>Ticket Info</span>
+    <span id="go_back">Ticket Info</span>
     <div class="clear"></div>
 </header>
 <section class="logo-license">
@@ -205,14 +205,17 @@
 </script>
 <script>
     $(function(){
-$("#logox").click(function(){
-    $(".htmleaf-container").show();
-})
-        $("#clipBtn").click(function(){
-            $("#logox").empty();
-            $('#logox').append('<img src="' + imgsource + '" align="absmiddle" style=" width: 5rem;height: 4.16rem; margin-left: 1.5rem;margin-top: 1.92rem">');
-            $(".htmleaf-container").hide();
+        $("#logox").click(function(){
+        $(".htmleaf-container").show();
+    })
+    $("#clipBtn").click(function(){
+        $("#logox").empty();
+        $('#logox').append('<img src="' + imgsource + '" align="absmiddle" style=" width: 5rem;height: 4.16rem; margin-left: 1.5rem;margin-top: 1.92rem">');
+        $(".htmleaf-container").hide();
         })
+    $("#go_back").click(function(){
+        window.location.href='index.html';
+    })
     });
 </script>
 <script type="text/javascript">
