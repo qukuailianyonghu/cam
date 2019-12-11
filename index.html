@@ -14,7 +14,13 @@
 </head>
 <body>
 <header>
-    <img src="images/logo.png"/>
+    <img src="images/logo.png" style="width: 7rem;" id="home"/>
+    <img src="images/search.png"/>
+    
+    <img src="images/person.png" style="float: right; margin-right: 1rem;"/>
+    <img src="images/doing.png" style="float: right;"/>
+    <img src="images/sell.png" style="float: right;"/>
+
     <div class="clear"></div>
 </header>
 <section class="logo-license">
@@ -57,7 +63,7 @@
 
 function upload(){
     if($('#file0').val() == ''){
-        alert("请先输入照片!");
+        alert("please choice picture!");
     }else{
         let form = document.getElementById('uploadForm')
         let formData = new FormData(form) 
@@ -90,43 +96,14 @@ function upload(){
             console.log(error);
         }
     });
-
-    //     $.ajax({
-    //         url: 'http://localhost:8080/featurestore/management/install',
-    //         data: formData,
-    //         type: "POST",
-    //         enctype: 'multipart/form-data',
-    //         headers: {
-    //             "Authorization":"Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiYXBpOi8vc3R1Ymh1YiJdLCJzdWIiOiJGb0Y3UlZQTmFYQjFKMl9uY3ZodTB0eHQxZkVhIiwic2NvcGUiOlsiZGVmYXVsdCIsIm1scF9tb2RlbF9tZ210IiwibWxwX21vbml0b3JpbmciLCJtbHBfZmVhdHVyZV9zdG9yZSIsIm9wZW5pZCIsImF1dG9fcHJpY2luZyIsIm1scF9zZWN1cml0eSIsIm1scF9taW5pX2FwcCJdLCJpc3MiOiJodHRwczovL2FwYy5zdHViaHViLmNvbS9pZGVudGl0eS9vYXV0aCIsImV4cCI6MTU4OTAxNTYzOCwiaWF0IjoxNTczNDYzNjM4LCJqdGkiOiI4Nzg0Y2QwZC03YzI2LTQ0M2YtYjA4Yy01NjRhNjVhYjE4M2QiLCJjbGllbnRfaWQiOiJGb0Y3UlZQTmFYQjFKMl9uY3ZodTB0eHQxZkVhIn0.HsNeMd0vJcHHC5iOJTGYCxqs-UQ2AfT0V2e6o-KVqnwdYf3l6udz7x_aHLM_TuE5523DbRVrmyXantgjoK-RnRdt6wGiZ1AHUaj0FT7zh0iTZuoc5CpQB110beoNNH6loivJ-KREe7kBd-MvL3hLwHLfJZSeu2KK3j6hUDfZStBGtqEdrE0UoBHqtdMvih0IfYXgm5wdYCJ6jNxev251CNxVt85XCZa20KGNYRKPR-waKvEfQrYct89uvyUI-4Z13s0p4BtvLuEkEwzMuCwVKSOYK0h2C--Yzyhe1aEC6XVKYQqnw8lHse24cukyBPYxfxHgAw7qRtK0XJNE9J4MOQ",
-    //             "content-type": "multipart/form-data;boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW"
-    //         },
-    //         async: false,
-    //         cache: false,
-    //         timeout: 600000,
-    //         processData: false,
-    //         success: function(data) {
-    //             //成功
-    //             alert("done..............")
-    //         },
-    //         error: function() {
-    //             //失败
-    //             alert("fail.................")
-    //         }
-    //   })
     }
 }
 
 function direct(eventId,section,row,seat,auto_pricing) {
-        // var eventId = '103770834';
-        // var section = 115;
-        // var row = 'M';
-        // var seat = '2';
-        // var auto_pricing = 115;
         window.location.href='result.html?eventId=' + eventId + '&section=' + section
         + "&row=" + row + "&seat=" + seat + "&auto_pricing=" + auto_pricing;
     }
     var obUrl = ''
-    //document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
     $("#clipArea").photoClip({
         width: 199,
         height: 166,
@@ -134,10 +111,10 @@ function direct(eventId,section,row,seat,auto_pricing) {
         view: "#view",
         ok: "#clipBtn",
         loadStart: function() {
-            console.log("照片读取中");
+            console.log("reading picture");
         },
         loadComplete: function() {
-            console.log("照片读取完成");
+            console.log("reading finished");
         },
         clipFinish: function(dataURL) {
             console.log(dataURL);
@@ -146,6 +123,10 @@ function direct(eventId,section,row,seat,auto_pricing) {
 </script>
 <script>
 $(function(){
+    $("#home").click(function(){
+        window.location.href='home.html';
+    });
+
     $("#logox").click(function(){
         $(".htmleaf-container").show();
     })
@@ -343,7 +324,7 @@ $(function (){
     function setImagePreview() {
         var preview, img_txt, localImag, file_head = document.getElementById("file_head"),
                 picture = file_head.value;
-        if (!picture.match(/.jpg|.gif|.png|.bmp/i)) return alert("您上传的图片格式不正确，请重新选择！"),
+        if (!picture.match(/.jpg|.gif|.png|.bmp/i)) return alert("picture format not right"),
                 !1;
         if (preview = document.getElementById("preview"), file_head.files && file_head.files[0]) preview.style.display = "block",
                 preview.style.width = "63px",
@@ -360,7 +341,7 @@ $(function (){
                 localImag.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale)",
                         localImag.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = img_txt
             } catch(f) {
-                return alert("您上传的图片格式不正确，请重新选择！"),
+                return alert("picture format error,pls try again"),
                         !1
             }
             preview.style.display = "none",

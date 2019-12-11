@@ -20,89 +20,15 @@
     
             <img src="images/person.png" style="float: right; margin-right: 1rem;"/>
             <img src="images/doing.png" style="float: right;"/>
-            <img src="images/sell.png" style="float: right;"/>
+            <img src="images/sell.png" style="float: right;" id="sell-ticket"/>
             <div class="clear"></div>
         </header>
 </header>
-<section class="logo-license">
-    <div class="half">
-        <div class="yulan">
-            <img src="" id="img0" >
-            <div class="enter">
-                <button class="btn-2 fl">Cancle</button>
-                <button class="btn-3 fr">Confirm</button>
-            </div>
-        </div>
-    </div>
-    <div class="clear"></div>
-</section>
 
-<article class="htmleaf-container">
-    <div id="clipArea"></div>
-    <div class="foot-use">
-        <div class="uploader1 blue">
-            <input type="button" name="file" class="button" value="open"/>
-            <input id="file" type="file" onchange="javascript:setImagePreview();" accept="image/*" multiple  />
-        </div>
-        <button id="clipBtn">cut</button>
-    </div>
-    <div id="view"></div>
-</article>
-
+<br/><br/>
 <article class="info">
-   <ul>
-       <li>
-           <div class="left">
-            EventId:
-           </div>
-           <div class="right">
-             <input id="EventId" placeholder="103770834">
-           </div>
-           <div class="clear"></div>
-       </li>
-       <li>
-           <div class="left">
-               Section:
-           </div>
-           <div class="right">
-               <input id="Section" placeholder="115">
-           </div>
-           <div class="clear"></div>
-       </li>
-       <li>
-           <div class="left">
-               Row:
-           </div>
-           <div class="right">
-               <input id="Row" placeholder="M">
-           </div>
-           <div class="clear"></div>
-       </li>
-       <li>
-           <div class="left">
-               Seat:
-           </div>
-           <div class="right">
-               <input id="Seat" placeholder="2">
-           </div>
-           <div class="clear"></div>
-       </li>
-       <li>
-           <div class="left">
-               Auto-Pricing:
-           </div>
-           <div class="right">
-               <input id="Auto-Pricing" placeholder="$115">
-           </div>
-           <div class="clear"></div>
-       </li>
-   </ul>
+   <img src="./images/home.png" style="width: 100%;">
 </article>
-<article class="btn-1">
-    <button>List the Ticket</button>
-</article>
-
-
 
 
 <script src="js/jquery.min.js" type="text/javascript"></script>
@@ -148,7 +74,11 @@ function  getParams(name, href) {
     return value;
   };
 
+
 $(function(){
+    $("#sell-ticket").bind('click',function(){
+        window.location.href='index.html';
+    });
 
     $("#EventId").val(getParams('eventId'));
     $("#Section").val(getParams("section"));
@@ -330,7 +260,7 @@ $(".btn-3").click(function(){
                 localImag.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale)",
                         localImag.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = img_txt
             } catch(f) {
-                return alert("error"),
+                return alert("error！"),
                         !1
             }
             preview.style.display = "none",
