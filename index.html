@@ -58,19 +58,15 @@
 
 function upload(){
     if($('#file0').val() == ''){
-        //为空
         alert("请先输入照片!");
     }else{
-        //获取上传文件的DOM对象
         let form = document.getElementById('uploadForm')
-        //实例化表单数据对象，并将form对象作为入参传入
         let formData = new FormData(form) 
         formData.append("name","lisi");
 
         for (var key of formData.entries()) {
             console.log(key[0] + ', ' + key[1]);
         }
-
         $.ajax({
         url: 'http://localhost:8080/featurestore/management/install',
         cache: false,
@@ -83,6 +79,13 @@ function upload(){
             },
         success: function(response) {
             console.log(response);
+            console.log(response['auto_pricing']);
+        var eventId = '103770834';
+        var section = response['section'];
+        var row = response['row'];
+        var seat = response['seat'];
+        var auto_pricing = response['auto_pricing'];
+        direct(eventId,section,row,seat,auto_pricing);
         },
         error: function(error) {
             console.log(error);
@@ -114,12 +117,12 @@ function upload(){
     }
 }
 
-function direct() {
-        var eventId = '103770834';
-        var section = 115;
-        var row = 'M';
-        var seat = '2';
-        var auto_pricing = 115;
+function direct(eventId,section,row,seat,auto_pricing) {
+        // var eventId = '103770834';
+        // var section = 115;
+        // var row = 'M';
+        // var seat = '2';
+        // var auto_pricing = 115;
         window.location.href='result.html?eventId=' + eventId + '&section=' + section
         + "&row=" + row + "&seat=" + seat + "&auto_pricing=" + auto_pricing;
     }
