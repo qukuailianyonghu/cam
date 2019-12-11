@@ -68,7 +68,7 @@ function upload(){
             console.log(key[0] + ', ' + key[1]);
         }
         $.ajax({
-        url: 'http://localhost:8080/featurestore/management/install',
+        url: 'https://hack2019-uoltrlruwa-uc.a.run.app/ocr',
         cache: false,
         contentType: false,
         processData: false,
@@ -80,12 +80,12 @@ function upload(){
         success: function(response) {
             console.log(response);
             console.log(response['auto_pricing']);
-        var eventId = '103770834';
-        var section = response['section'];
-        var row = response['row'];
-        var seat = response['seat'];
-        var auto_pricing = response['auto_pricing'];
-        direct(eventId,section,row,seat,auto_pricing);
+            var eventId = '103770834';
+            var section = response['section'];
+            var row = response['row'];
+            var seat = response['seat'];
+            var auto_pricing = response['auto_pricing'];
+            direct(eventId,section,row,seat,auto_pricing);
         },
         error: function(error) {
             console.log(error);
