@@ -26,7 +26,9 @@
             <a class="license">
                 <img id="img-1" src="images/logo_n.png"/>
             </a>
-            <input id="file0" class="file-3" type="file" accept="image/*" capture="camera"/>
+            <form enctype="multipart/form-data" id="uploadForm">
+                <input id="file0" class="file-3" name="file" type="file" accept="image/*" capture="camera"/>
+            </form>
         </div>
         <div class="yulan">
             <img src="" id="img0" >
@@ -53,7 +55,66 @@
 <script src="js/hammer.js"></script>
 <script src="js/jquery.photoClip.js"></script>
 <script>
-    function direct() {
+
+function upload(){
+    if($('#file0').val() == ''){
+        //为空
+        alert("请先输入照片!");
+    }else{
+        //获取上传文件的DOM对象
+        let form = document.getElementById('uploadForm')
+        //实例化表单数据对象，并将form对象作为入参传入
+        let formData = new FormData(form) 
+        formData.append("name","lisi");
+
+        for (var key of formData.entries()) {
+            console.log(key[0] + ', ' + key[1]);
+        }
+
+        $.ajax({
+        url: 'http://localhost:8080/featurestore/management/install',
+        cache: false,
+        contentType: false,
+        processData: false,
+        data: formData,
+        type: 'POST',
+        headers: {
+                 "Authorization":"Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiYXBpOi8vc3R1Ymh1YiJdLCJzdWIiOiJGb0Y3UlZQTmFYQjFKMl9uY3ZodTB0eHQxZkVhIiwic2NvcGUiOlsiZGVmYXVsdCIsIm1scF9tb2RlbF9tZ210IiwibWxwX21vbml0b3JpbmciLCJtbHBfZmVhdHVyZV9zdG9yZSIsIm9wZW5pZCIsImF1dG9fcHJpY2luZyIsIm1scF9zZWN1cml0eSIsIm1scF9taW5pX2FwcCJdLCJpc3MiOiJodHRwczovL2FwYy5zdHViaHViLmNvbS9pZGVudGl0eS9vYXV0aCIsImV4cCI6MTU4OTAxNTYzOCwiaWF0IjoxNTczNDYzNjM4LCJqdGkiOiI4Nzg0Y2QwZC03YzI2LTQ0M2YtYjA4Yy01NjRhNjVhYjE4M2QiLCJjbGllbnRfaWQiOiJGb0Y3UlZQTmFYQjFKMl9uY3ZodTB0eHQxZkVhIn0.HsNeMd0vJcHHC5iOJTGYCxqs-UQ2AfT0V2e6o-KVqnwdYf3l6udz7x_aHLM_TuE5523DbRVrmyXantgjoK-RnRdt6wGiZ1AHUaj0FT7zh0iTZuoc5CpQB110beoNNH6loivJ-KREe7kBd-MvL3hLwHLfJZSeu2KK3j6hUDfZStBGtqEdrE0UoBHqtdMvih0IfYXgm5wdYCJ6jNxev251CNxVt85XCZa20KGNYRKPR-waKvEfQrYct89uvyUI-4Z13s0p4BtvLuEkEwzMuCwVKSOYK0h2C--Yzyhe1aEC6XVKYQqnw8lHse24cukyBPYxfxHgAw7qRtK0XJNE9J4MOQ",
+            },
+        success: function(response) {
+            console.log(response);
+        },
+        error: function(error) {
+            console.log(error);
+        }
+    });
+
+    //     $.ajax({
+    //         url: 'http://localhost:8080/featurestore/management/install',
+    //         data: formData,
+    //         type: "POST",
+    //         enctype: 'multipart/form-data',
+    //         headers: {
+    //             "Authorization":"Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiYXBpOi8vc3R1Ymh1YiJdLCJzdWIiOiJGb0Y3UlZQTmFYQjFKMl9uY3ZodTB0eHQxZkVhIiwic2NvcGUiOlsiZGVmYXVsdCIsIm1scF9tb2RlbF9tZ210IiwibWxwX21vbml0b3JpbmciLCJtbHBfZmVhdHVyZV9zdG9yZSIsIm9wZW5pZCIsImF1dG9fcHJpY2luZyIsIm1scF9zZWN1cml0eSIsIm1scF9taW5pX2FwcCJdLCJpc3MiOiJodHRwczovL2FwYy5zdHViaHViLmNvbS9pZGVudGl0eS9vYXV0aCIsImV4cCI6MTU4OTAxNTYzOCwiaWF0IjoxNTczNDYzNjM4LCJqdGkiOiI4Nzg0Y2QwZC03YzI2LTQ0M2YtYjA4Yy01NjRhNjVhYjE4M2QiLCJjbGllbnRfaWQiOiJGb0Y3UlZQTmFYQjFKMl9uY3ZodTB0eHQxZkVhIn0.HsNeMd0vJcHHC5iOJTGYCxqs-UQ2AfT0V2e6o-KVqnwdYf3l6udz7x_aHLM_TuE5523DbRVrmyXantgjoK-RnRdt6wGiZ1AHUaj0FT7zh0iTZuoc5CpQB110beoNNH6loivJ-KREe7kBd-MvL3hLwHLfJZSeu2KK3j6hUDfZStBGtqEdrE0UoBHqtdMvih0IfYXgm5wdYCJ6jNxev251CNxVt85XCZa20KGNYRKPR-waKvEfQrYct89uvyUI-4Z13s0p4BtvLuEkEwzMuCwVKSOYK0h2C--Yzyhe1aEC6XVKYQqnw8lHse24cukyBPYxfxHgAw7qRtK0XJNE9J4MOQ",
+    //             "content-type": "multipart/form-data;boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW"
+    //         },
+    //         async: false,
+    //         cache: false,
+    //         timeout: 600000,
+    //         processData: false,
+    //         success: function(data) {
+    //             //成功
+    //             alert("done..............")
+    //         },
+    //         error: function() {
+    //             //失败
+    //             alert("fail.................")
+    //         }
+    //   })
+    }
+}
+
+function direct() {
         var eventId = '103770834';
         var section = 115;
         var row = 'M';
@@ -261,7 +322,8 @@ $(function (){
     })
 
     $(".btn-1").click(function(){
-        direct();
+        upload();
+        // direct();
     })
 
     $(".btn-6").click(function(){
