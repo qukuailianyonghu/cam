@@ -19,6 +19,10 @@ body {
     float: left;
 }
 
+.fc {
+    float: center;
+}
+
 .fr {
     float: right;
 }
@@ -93,7 +97,7 @@ header span {
 }
 
 .logo-license {
-    margin-top: 8rem
+    margin-top: 5.0rem
 }
 .license{
     position: relative;

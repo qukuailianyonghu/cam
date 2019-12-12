@@ -23,7 +23,9 @@
 
     <div class="clear"></div>
 </header>
+
 <section class="logo-license">
+        <img src="./images/middle.png" style="width: 100%;">
     <div>
         <br/><br/><br/><br/><br/><br/><br/><br/>
         <div class="uploader blue" style="height: 80%;">
@@ -47,12 +49,61 @@
     <div class="clear"></div>
 </section>
 
-<br/><br/><br/><br/><br/><br/><br/><br/>
-<br/><br/><br/><br/><br/><br/><br/><br/>
-<br/><br/><br/><br/><br/><br/><br/><br/>
+<br/><br/><br/><br/><br/><br/>
+<br/><br/><br/><br/><br/><br/>
 <article class="btn-1">
-    <button>Submit</button>
+    <button>Upload Ticket</button>
 </article>
+
+<article class="info" hidden>
+        <ul>
+            <li>
+                <div class="left">
+                 EventId:
+                </div>
+                <div class="right">
+                  <input id="EventId" placeholder="103770834">
+                </div>
+                <div class="clear"></div>
+            </li>
+            <li>
+                <div class="left">
+                    Section:
+                </div>
+                <div class="right">
+                    <input id="Section" placeholder="115">
+                </div>
+                <div class="clear"></div>
+            </li>
+            <li>
+                <div class="left">
+                    Row:
+                </div>
+                <div class="right">
+                    <input id="Row" placeholder="M">
+                </div>
+                <div class="clear"></div>
+            </li>
+            <li>
+                <div class="left">
+                    Seat:
+                </div>
+                <div class="right">
+                    <input id="Seat" placeholder="2">
+                </div>
+                <div class="clear"></div>
+            </li>
+            <li>
+                <div class="left">
+                    Auto-Pricing:
+                </div>
+                <div class="right">
+                    <input id="Auto-Pricing" placeholder="$115">
+                </div>
+                <div class="clear"></div>
+            </li>
+        </ul>
+    </article>
 
 <script src="js/jquery.min.js" type="text/javascript"></script>
 <script>window.jQuery || document.write('<script src="js/jquery-2.1.1.min.js"><\/script>')</script>
@@ -90,7 +141,9 @@ function upload(){
             var row = response['row'];
             var seat = response['seat'];
             var auto_pricing = response['auto_pricing'];
-            direct(eventId,section,row,seat,auto_pricing);
+
+            var surl = $('#img0').attr('src');
+            direct(eventId,section,row,seat,auto_pricing,surl);
         },
         error: function(error) {
             console.log(error);
@@ -99,11 +152,11 @@ function upload(){
     }
 }
 
-function direct(eventId,section,row,seat,auto_pricing) {
+function direct(eventId,section,row,seat,auto_pricing,surl) {
         window.location.href='result.html?eventId=' + eventId + '&section=' + section
-        + "&row=" + row + "&seat=" + seat + "&auto_pricing=" + auto_pricing;
+        + "&row=" + row + "&seat=" + seat + "&auto_pricing=" + auto_pricing + "&suburl=" + surl;
     }
-    var obUrl = ''
+    
     $("#clipArea").photoClip({
         width: 199,
         height: 166,
@@ -217,6 +270,7 @@ $(function(){
     });
 </script>
 <script>
+    var obUrl = ''
     $("#file0").change(function(){
         var objUrl = getObjectURL(this.files[0]) ;
          obUrl = objUrl;
@@ -305,8 +359,9 @@ $(function (){
     })
 
     $(".btn-1").click(function(){
-        upload();
+         upload();
         // direct();
+        // $(".info").show();
     })
 
     $(".btn-6").click(function(){
